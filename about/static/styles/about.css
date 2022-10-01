@@ -1,0 +1,12 @@
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content span{
+    color: rgb(124, 224, 124);
+}
+.show_name{
+    text-decoration: none;
+    color:#333
+}

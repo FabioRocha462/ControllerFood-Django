@@ -1,0 +1,20 @@
+{% extends 'baseCategory.html' %}
+{% block title %} edit category {% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>Edite a Categoria</h1>
+</div>
+<br>
+<hr>
+<div class="content">
+    <form action="update/{{category.id}}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <input type="text" name="name" value="{{category.name}}" required placeholder="Nome da categoria" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="content"> <button type="submit" class="btn btn-dark">Submit</button></div>
+       
+    </form>
+</div>
+{% endblock %}

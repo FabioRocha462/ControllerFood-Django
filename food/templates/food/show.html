@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %} Show Food {% endblock %}
+{% block content %}
+<div class="content">
+    {{food.name}}
+    {{food.category}}
+    {{food.created_at}}
+</div>
+{% endblock %}

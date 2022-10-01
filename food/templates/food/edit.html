@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} index Food {% endblock %}
+{% block content %}
+<div class="content">
+    <h1>Edite o Alimento</h1>
+</div>
+<br>
+<div class="content">
+    <div class="form-content">
+        <form action="update/{{food.id}}" method="POST">
+          {% csrf_token %}
+            <div class="mb-3">
+              <input type="text"  name='name' value="{{food.name}}" placeholder="Alimento" width="50px" class="form-control" >
+            </div>
+            <div class="mb-3">
+              <input type="number" name="quantity" value="{{food.quantity}}"placeholder="Quantidade" class="form-control" >
+            </div>
+            <div class="mb-3">
+              <input type="number" name="weight"value="{{food.weight}}" placeholder="peso em gramas" class="form-control" >
+            </div>
+            <div class="mb-3">
+              <input class="form-control" list="datalistOptions" id="exampleDataList" name="category" value="{{food.category}}" placeholder="categoria">
+              <datalist id="datalistOptions">
+                {% for category in categorys %}
+                <option>{{category.name}}</option>
+                {% endfor %}
+              </datalist>
+          </div>
+            <hr>
+            <div class="content">
+              <button type="submit" id="btn" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -6,7 +6,7 @@ from category.models import Category
 # Create your views here.
 
 def index(request):
-    food = Food.objects.all()
+    food = Food.objects.all().order_by('name')
     return render(request, 'food/index.html', {'food': food})
 
 def create(request):

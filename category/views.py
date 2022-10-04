@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from .models import Category
 
 def index (request):
-    categorys = Category.objects.all()
+    categorys = Category.objects.all().order_by('name')
     return render(request,'category/index.html', {'categorys':categorys})
 
 

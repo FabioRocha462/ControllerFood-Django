@@ -1,0 +1,34 @@
+{% extends 'baseSchools.html' %}
+{% block title %} index schools {% endblock %}
+{% block content %}
+<div class="content">
+    <h1> Crie uma Escola</h1>
+</div>
+
+<div class="content">
+    <form action="store/" method="POST">
+        {% csrf_token %}
+          <div class="mb-3">
+            <input type="text" required name='name' placeholder="Nome da escola" width="50px" class="form-control" >
+          </div>
+          <div class="mb-3">
+            <input type="email"required name="email" placeholder="email" class="form-control" >
+          </div>
+          <div class="mb-3">
+            <input type="contato" required name="phone" placeholder="telefone" class="form-control" >
+          </div>
+          <div class="mb-3">
+            <input class="form-control" list="datalistOptions" id="exampleDataList" name="director" placeholder="diretor">
+            <datalist id="datalistOptions">
+              {% for director in directors %}
+              <option>{{director.name}}</option>
+              {% endfor %}
+            </datalist>
+        </div>
+          <hr>
+          <div class="content">
+            <button type="submit" id="btn" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+</div>
+{% endblock %}

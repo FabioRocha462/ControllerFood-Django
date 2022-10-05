@@ -7,10 +7,16 @@ import directors
 
 from .models import School
 from directors.models import Director
+from food.models import Food
 
 def index(request):
     schools = School.objects.all().order_by('name')
     return render(request, 'schools/index.html', {'schools':schools})
+
+def show(request, id):
+    school = School.objects.get(id= id)
+    foods = school.food_set.all()
+    return render(request, 'schools/show.html', {'school':school, 'foods':foods})
 
 def create(request):
     directors = Director.objects.all()
@@ -59,4 +65,16 @@ def delete(request, id):
     school = School.objects.get(id= id)
     school.delete()
     return redirect('/schools')
+
+def search(request):
+    name = request.GET['name']
+    schoolName = School.objects.filter(name__contains = name)
+    return render(request,'schools/index.html', {'schoolName':schoolName})
+
+def foodSearch(request,id):
+    school = School.objects.get(id= id)
+    name = request.GET['name']
+    foods = school.food_set.all()
+    foodSearch = Food.objects.filter(name__contains = name)
+    return render(request, 'schools/show.html', {'school':school, 'foodSearch':foodSearch, 'foods':foods})
 

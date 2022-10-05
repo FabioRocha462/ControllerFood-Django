@@ -5,7 +5,7 @@
     <h1>Escolas</h1>
 </div>
 <br>
-<form action="search/" method='GET' class="d-flex">
+<form action="/schools/search" method='GET' class="d-flex">
     <input class="form-control me-2" name='name'type="search" placeholder="Pesquise pelo nome" aria-label="Search">
     <button class="btn btn-outline-success" type="submit">Search</button>
   </form>
@@ -24,7 +24,7 @@
     {% for school in schoolName %}
         <tbody>
             <tr>
-                <td><strong><a href="#">{{school.name}}</strong></a></td>
+                <td><strong><a href="school/show/{{school.id}}">{{school.name}}</strong></a></td>
                 <td><strong>{{school.email}}</strong></td>
                 <td><strong>{{school.phone}}</strong><td>
                 <td>
@@ -66,7 +66,7 @@
     {% for school in schools %}
         <tbody>
             <tr>
-                <td><strong><a href="#">{{school.name}}</strong></a></td>
+                <td><strong><a href="show/{{school.id}}">{{school.name}}</strong></a></td>
                 <td><strong>{{school.email}}</strong></td>
                 <td><strong>{{school.phone}}</strong><td>
                 <td>

@@ -1,6 +1,6 @@
 from django.db import models
-
 from directors.models import Director
+
 
 # Create your models here.
 class School(models.Model):

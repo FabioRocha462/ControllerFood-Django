@@ -1,0 +1,65 @@
+{% extends 'baseSchools.html' %}
+{% block title %} edite schools {% endblock %}
+{% block content %}
+<div class="content">
+    <div class="container">
+        <div class="row">
+          <div class="col-9"><h1>{{school.name}}</h1></div>
+          <div class="col-4"><h3>Diretor(a): {{school.diretor.name}}</h3></div>
+          <div class="col-6"><h5>{{school.email}}</h5></div>
+        </div>
+      </div>
+</div>
+<br>
+<div class="content">
+  {% for food in foods %}
+  <ul>
+    <li>{{food.name}}</li>
+  </ul>
+  {% endfor %}
+</div>
+<div class="content"><h1>Registrar Alimentos </h1></div>
+<div class="content">
+  <div class="col-6">
+    <br>
+  <form action="/schools/foodsearchs/{{school.id}}" method='GET' class="d-flex">
+    <input class="form-control me-2" name='name'type="search" placeholder="Pesquise pelo nome do Alimento" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+  <br>
+  </div>
+</div>
+
+  
+    
+    <div class="row row-cols-1 row-cols-md-3 g-6">
+      {% for food in foodSearch %}
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><strong>NOME:</strong> {{food.name}}</h5>
+            <p class="card-text"><strong>CATEGORIA: </strong> {{food.category}}</p>
+            <p class="card-text"><strong>VALIDADE: </strong>{{food.validity}}</p>
+          </div>
+          <div class="card-footer">
+            <form class="row g-3">
+              <div class="col-auto">
+                <label for="staticEmail2" class="visually-hidden"></label>
+                <input type="number"  class="form-control-plaintext" id="staticEmail2" placeholder="quantidade">
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-dark mb-3">Enviar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+   
+  
+
+
+
+{% endblock %}

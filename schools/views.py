@@ -78,3 +78,14 @@ def foodSearch(request,id):
     foodSearch = Food.objects.filter(name__contains = name)
     return render(request, 'schools/show.html', {'school':school, 'foodSearch':foodSearch, 'foods':foods})
 
+def sendFood(request, idFood, idSchool):
+    quantity = request.GET['quantity']
+    food = Food.objects.get(id= idFood)
+    schools = School.objects.get(id = idSchool)
+
+    food.quantity = food.quantity - int(quantity)
+
+    food.save()
+    food.school.add(schools)
+
+    return redirect('/schools')

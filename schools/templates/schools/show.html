@@ -4,21 +4,40 @@
 <div class="content">
     <div class="container">
         <div class="row">
-          <div class="col-9"><h1>{{school.name}}</h1></div>
-          <div class="col-4"><h3>Diretor(a): {{school.diretor.name}}</h3></div>
-          <div class="col-6"><h5>{{school.email}}</h5></div>
+          <div class="col-9"><h1>ESCOLA: {{school.name}}</h1></div>
+          <div class="col-4"><h3>DIRETOR(a): {{school.diretor.name}}</h3></div>
+          <div class="col-6"><h5>E-MAIL: {{school.email}}</h5></div>
         </div>
       </div>
 </div>
 <br>
+<hr>
 <div class="content">
-  {% for food in foods %}
-  <ul>
-    <li>{{food.name}}</li>
-  </ul>
-  {% endfor %}
+  <h1> {{school.name}}</h1>
 </div>
-<div class="content"><h1>Registrar Alimentos </h1></div>
+<div class="content">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Validade</th>
+        <th scope="col">Categoria</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for food in foods %}
+      <tr>
+        <td>{{food.name}}</td>
+        <td>{{food.validity}}</td>
+        <td>{{food.category}}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+ 
+</div>
+<hr>
+<div class="content"><h1>Registrar os Alimentos </h1></div>
 <div class="content">
   <div class="col-6">
     <br>
@@ -40,17 +59,20 @@
             <h5 class="card-title"><strong>NOME:</strong> {{food.name}}</h5>
             <p class="card-text"><strong>CATEGORIA: </strong> {{food.category}}</p>
             <p class="card-text"><strong>VALIDADE: </strong>{{food.validity}}</p>
+            <p class="card-text"><strong>QUANTIDADE: </strong>{{food.quantity}}</p>
           </div>
           <div class="card-footer">
-            <form class="row g-3">
+            {% if food.quantity > 0 %}
+            <form action="/schools/register/{{food.id}}/{{school.id}}" class="row g-3">
               <div class="col-auto">
                 <label for="staticEmail2" class="visually-hidden"></label>
-                <input type="number"  class="form-control-plaintext" id="staticEmail2" placeholder="quantidade">
+                <input type="number"  name="quantity" class="form-control-plaintext" id="staticEmail2" placeholder="quantidade">
               </div>
               <div class="col-auto">
                 <button type="submit" class="btn btn-dark mb-3">Enviar</button>
               </div>
             </form>
+          {% endif %}
           </div>
         </div>
       </div>

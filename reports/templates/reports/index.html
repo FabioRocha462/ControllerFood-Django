@@ -1,0 +1,87 @@
+
+{% extends 'baseReport.html' %}
+{% block title %} index report {% endblock %}
+{% block content %}
+<div class="content">
+<h1>Relatório</h1>
+
+</div>
+<div class="content"><h3>Por categoria</h3></div>
+  <div class="content">
+    <form action="/reports/forcategory/" method="GET" class="row g-3">
+        <div class="col-auto">
+            <input class="form-control" list="datalistOptions" id="exampleDataList" name="name" placeholder="categoria">
+            <datalist id="datalistOptions">
+              {% for category in categorys %}
+              <option>{{category.name}}</option>
+              {% endfor %}
+            </datalist>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3">enviar</button>
+        </div>
+      </form>
+  </div> 
+  <div class="content"><h3>Por Validade</h3></div>
+<div class="content">
+<form action="/reports/fordate/" method="GET" class="row g-3">
+    <div class="col-auto">
+      <label for="staticEmail2" class="visually-hidden"></label>
+      <input type="date" class="form-control" name="date"id="staticEmail2" >
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3">enviar</button>
+    </div>
+  </form>
+</div>
+<hr>
+
+    <div   class="content">
+          {% load static %}
+          <img src="{% static 'images/pjp.png' %}" alt="prefeitura de José da Penha/RN" width="300px" height="300px">
+    </div>
+    <div id="print" class="content">
+          <table  class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Validade</th>
+                    <th scope="col">Peso em gramas</th>
+                    <th scope="col">Categoria</th>
+                </tr>
+            </thead>
+          <tbody>
+            {% for food in foods %}
+            <tr>
+                <td>{{food.name}}</td>
+                <td>{{food.quantity}}</td>
+                <td>{{food.validity}}</td>
+                <td>{{food.weight}}</td>
+                <td>{{food.category}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>   
+
+
+
+<div class="content">
+    <button onclick="report()" class="btn btn-dark">Gerar Relatório</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"
+        integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs"
+        crossorigin="anonymous"></script>
+<script>
+  function report(){
+    var mytable = document.getElementById('print').innerHTML;
+
+    var doc = new jsPDF("retrato","mm",[600,500])
+    doc.setFontSize(12);
+    doc.fromHTML(mytable);
+
+    doc.save('report.pdf');
+  }
+</script>
+{% endblock %}

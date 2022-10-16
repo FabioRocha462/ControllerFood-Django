@@ -8,6 +8,8 @@ import directors
 from .models import School
 from directors.models import Director
 from food.models import Food
+from django.views.decorators.csrf
+import requires_csrf_token
 
 def index(request):
     schools = School.objects.all().order_by('name')
@@ -22,6 +24,7 @@ def create(request):
     directors = Director.objects.all()
     return render(request, 'schools/create.html', {'directors':directors})
 
+@requires_csrf_token
 def store(request):
     name = request.POST['name']
     email = request.POST['email']
@@ -44,6 +47,7 @@ def edit(request, id):
     directors = Director.objects.all()
     return render(request, 'schools/edit.html', {'school': school, 'directors':directors})
 
+@requires_csrf_token
 def update(request, id):
     name = request.POST['name']
     email = request.POST['email']

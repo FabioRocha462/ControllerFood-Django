@@ -4,6 +4,8 @@ import category
 from .models import Food
 from category.models import Category
 # Create your views here.
+from django.views.decorators.csrf
+import requires_csrf_token
 
 def index(request):
     food = Food.objects.all().order_by('name')
@@ -13,6 +15,7 @@ def create(request):
     categorys = Category.objects.all()
     return render( request, 'food/create.html', {'categorys':categorys})
 
+@requires_csrf_token
 def store(request):
     name = request.POST['name']
     validity = request.POST['validity']
@@ -41,6 +44,7 @@ def edit(request, id):
     categorys = Category.objects.all()
     return render( request, 'food/edit.html', {'food': food, 'categorys':categorys})
 
+@requires_csrf_token
 def update(request, id):
     food = Food.objects.get(id= id)
     name = request.POST['name']

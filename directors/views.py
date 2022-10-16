@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 import directors
 from .models import Director
 # Create your views here.
-
+from django.views.decorators.csrf
+import requires_csrf_token
 
 def index(request):
     directors = Director.objects.all().order_by('name')
@@ -12,6 +13,7 @@ def index(request):
 def create(request):
     return render(request, 'director/create.html')
 
+@requires_csrf_token
 def store(request):
     
     name = request.POST['name']
@@ -29,6 +31,7 @@ def edit(request, id):
     director = Director.objects.get(id= id)
     return render(request, 'director/edit.html', {'director': director})
 
+@requires_csrf_token
 def update(request, id):
     director = Director.objects.get(id= id)
     name = request.POST['name']

@@ -4,6 +4,8 @@ from django.shortcuts import render
 
 from food.models import Food
 from category.models import Category
+from django.views.decorators.csrf
+import requires_csrf_token
 
 def allfood(request):
     foods = Food.objects.all().order_by('name')

@@ -3,9 +3,9 @@ import json
 import category
 from .models import Food
 from category.models import Category
+from django.views.decorators.csrf import requires_csrf_token
 # Create your views here.
-from django.views.decorators.csrf
-import requires_csrf_token
+
 
 def index(request):
     food = Food.objects.all().order_by('name')
@@ -61,6 +61,7 @@ def update(request, id):
     food.save()
     return redirect('/')
 
+@requires_csrf_token
 def delete(request, id):
     food = Food.objects.get(id= id)
     food.delete()

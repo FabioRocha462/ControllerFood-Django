@@ -1,7 +1,6 @@
 from unicodedata import category
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf
-import requires_csrf_token
+from django.views.decorators.csrf import requires_csrf_token
 # Create your views here.
 
 from .models import Category
@@ -36,7 +35,8 @@ def show(request, id):
     category = Category.objects.get(id=id)
     foods = category.food_set.all()
     return render(request, 'category/show.html',{'category': category, 'foods':foods})
-
+    
+@requires_csrf_token
 def delete(request, id):
     category = Category.objects.get(id=id)
     category.delete()

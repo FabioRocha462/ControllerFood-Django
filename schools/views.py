@@ -1,6 +1,6 @@
 import sched
 from django.shortcuts import render, redirect
-
+from django.views.decorators.csrf import requires_csrf_token
 import directors
 
 # Create your views here.
@@ -8,8 +8,7 @@ import directors
 from .models import School
 from directors.models import Director
 from food.models import Food
-from django.views.decorators.csrf
-import requires_csrf_token
+
 
 def index(request):
     schools = School.objects.all().order_by('name')
@@ -65,6 +64,7 @@ def update(request, id):
 
     return redirect('/schools')
 
+@requires_csrf_token
 def delete(request, id):
     school = School.objects.get(id= id)
     school.delete()

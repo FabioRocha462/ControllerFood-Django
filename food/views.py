@@ -3,7 +3,7 @@ import json
 import category
 from .models import Food
 from category.models import Category
-from django.views.decorators.csrf import requires_csrf_token
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
@@ -15,7 +15,7 @@ def create(request):
     categorys = Category.objects.all()
     return render( request, 'food/create.html', {'categorys':categorys})
 
-@requires_csrf_token
+@csrf_exempt
 def store(request):
     name = request.POST['name']
     validity = request.POST['validity']
@@ -44,7 +44,7 @@ def edit(request, id):
     categorys = Category.objects.all()
     return render( request, 'food/edit.html', {'food': food, 'categorys':categorys})
 
-@requires_csrf_token
+@csrf_exempt
 def update(request, id):
     food = Food.objects.get(id= id)
     name = request.POST['name']
@@ -61,7 +61,7 @@ def update(request, id):
     food.save()
     return redirect('/')
 
-@requires_csrf_token
+@csrf_exempt
 def delete(request, id):
     food = Food.objects.get(id= id)
     food.delete()

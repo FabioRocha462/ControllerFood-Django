@@ -1,6 +1,6 @@
 import sched
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import requires_csrf_token
+from django.views.decorators.csrf import csrf_exempt
 import directors
 
 # Create your views here.
@@ -23,7 +23,7 @@ def create(request):
     directors = Director.objects.all()
     return render(request, 'schools/create.html', {'directors':directors})
 
-@requires_csrf_token
+@csrf_exempt
 def store(request):
     name = request.POST['name']
     email = request.POST['email']
@@ -46,7 +46,7 @@ def edit(request, id):
     directors = Director.objects.all()
     return render(request, 'schools/edit.html', {'school': school, 'directors':directors})
 
-@requires_csrf_token
+@csrf_exempt
 def update(request, id):
     name = request.POST['name']
     email = request.POST['email']
@@ -64,7 +64,7 @@ def update(request, id):
 
     return redirect('/schools')
 
-@requires_csrf_token
+@csrf_exempt
 def delete(request, id):
     school = School.objects.get(id= id)
     school.delete()

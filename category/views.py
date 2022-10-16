@@ -1,6 +1,6 @@
 from unicodedata import category
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import requires_csrf_token
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 from .models import Category
@@ -13,7 +13,7 @@ def index (request):
 def create(request):
     return render(request, 'category/create.html')
 
-@requires_csrf_token
+@csrf_exempt
 def store(request):
     name = request.POST['name']
     category = Category(name=name)
@@ -24,7 +24,7 @@ def edit(request, id):
     category = Category.objects.get(id= id)
     return render(request, 'category/edit.html', {'category': category})
 
-@requires_csrf_token
+@csrf_exempt
 def update(request, id):
     category = Category.objects.get(id=id)
     category.name = request.POST['name']
@@ -36,7 +36,7 @@ def show(request, id):
     foods = category.food_set.all()
     return render(request, 'category/show.html',{'category': category, 'foods':foods})
     
-@requires_csrf_token
+@csrf_exempt
 def delete(request, id):
     category = Category.objects.get(id=id)
     category.delete()
